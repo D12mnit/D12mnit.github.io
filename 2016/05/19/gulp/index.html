@@ -82,7 +82,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="前端,JavaScript," />
+  <meta name="keywords" content="前端,Gulp," />
 
 
 
@@ -100,16 +100,16 @@
 
 
 
-<meta name="description" content="闭包是JavaScript中的一个难点，今天在啃红宝书时刚好看到这里，决定来记录一下自己对闭包的理解和学习。">
+<meta name="description" content="工作中从开发环境到生产环境，需要做许许多多的操作，诸如压缩图片，合并压缩js，css文件，生成css sprite图等等。如果持续靠人工来做这些事情真的是很无聊很烦躁，所以就要靠自动化工具来帮忙啦！">
 <meta property="og:type" content="article">
-<meta property="og:title" content="浅谈JavaScript中的闭包">
-<meta property="og:url" content="http://d12mnit.github.io/2016/01/16/javascript-closure/index.html">
+<meta property="og:title" content="使用gulp构建项目">
+<meta property="og:url" content="http://d12mnit.github.io/2016/05/19/gulp/index.html">
 <meta property="og:site_name" content="D12mnIT's Notes">
-<meta property="og:description" content="闭包是JavaScript中的一个难点，今天在啃红宝书时刚好看到这里，决定来记录一下自己对闭包的理解和学习。">
-<meta property="og:updated_time" content="2016-05-04T12:28:08.000Z">
+<meta property="og:description" content="工作中从开发环境到生产环境，需要做许许多多的操作，诸如压缩图片，合并压缩js，css文件，生成css sprite图等等。如果持续靠人工来做这些事情真的是很无聊很烦躁，所以就要靠自动化工具来帮忙啦！">
+<meta property="og:updated_time" content="2016-05-19T03:24:04.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="浅谈JavaScript中的闭包">
-<meta name="twitter:description" content="闭包是JavaScript中的一个难点，今天在啃红宝书时刚好看到这里，决定来记录一下自己对闭包的理解和学习。">
+<meta name="twitter:title" content="使用gulp构建项目">
+<meta name="twitter:description" content="工作中从开发环境到生产环境，需要做许许多多的操作，诸如压缩图片，合并压缩js，css文件，生成css sprite图等等。如果持续靠人工来做这些事情真的是很无聊很烦躁，所以就要靠自动化工具来帮忙啦！">
 
 
 
@@ -127,7 +127,7 @@
   };
 </script>
 
-  <title> 浅谈JavaScript中的闭包 | D12mnIT's Notes </title>
+  <title> 使用gulp构建项目 | D12mnIT's Notes </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -267,7 +267,7 @@
             
             
               
-                浅谈JavaScript中的闭包
+                使用gulp构建项目
               
             
           </h1>
@@ -279,8 +279,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-01-16T11:48:33+08:00" content="2016-01-16">
-              2016-01-16
+            <time itemprop="dateCreated" datetime="2016-05-19T10:26:42+08:00" content="2016-05-19">
+              2016-05-19
             </time>
           </span>
 
@@ -309,8 +309,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/01/16/javascript-closure/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/01/16/javascript-closure/" itemprop="commentsCount"></span>
+                <a href="/2016/05/19/gulp/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/05/19/gulp/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -320,7 +320,7 @@
 
           
           
-             <span id="/2016/01/16/javascript-closure/" class="leancloud_visitors" data-flag-title="浅谈JavaScript中的闭包">
+             <span id="/2016/05/19/gulp/" class="leancloud_visitors" data-flag-title="使用gulp构建项目">
                &nbsp; | &nbsp;
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -342,23 +342,28 @@
       
 
       
-        <p>闭包是<code>JavaScript</code>中的一个难点，今天在啃红宝书时刚好看到这里，决定来记录一下自己对闭包的理解和学习。<br><a id="more"></a></p>
-<h4 id="闭包的定义"><a href="#闭包的定义" class="headerlink" title="闭包的定义"></a>闭包的定义</h4><blockquote>
-<p><code>闭包</code>是指有权访问另一个函数作用域中的变量的函数，创建闭包的常见方式，就是在一个函数内部创建另一个函数。<br>–《JavaScript高级程序设计第三版》</p>
-</blockquote>
-<p>比较简单的闭包例子就是嵌套函数的闭包：<br><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">example1</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">	<span class="keyword">var</span> a = <span class="number">1</span>;</span><br><span class="line">	<span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">		<span class="built_in">console</span>.log(a++);</span><br><span class="line">	&#125;;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> b = example1(); </span><br><span class="line">b();	<span class="comment">//1</span></span><br><span class="line">b();	<span class="comment">//2  a未被回收，继续累加</span></span><br></pre></td></tr></table></figure></p>
-<p>由此可见闭包有一个好处就是可以将一个变量长期储存在内存中，并且避免变量的全局污染。</p>
-<p>如果想要实现一个类似id累加的函数，并且不使用全局变量，闭包就能够很轻松的实现。</p>
-<h4 id="闭包的特性"><a href="#闭包的特性" class="headerlink" title="闭包的特性"></a>闭包的特性</h4><blockquote>
-<p>1.函数嵌套函数</p>
-<p>2.函数内部可以引用外部的参数和变量</p>
-<p>3.参数和变量不会被垃圾回收机制回收</p>
-</blockquote>
-<h4 id="能够在循环中找到对应元素的索引"><a href="#能够在循环中找到对应元素的索引" class="headerlink" title="能够在循环中找到对应元素的索引"></a>能够在循环中找到对应元素的索引</h4><p>作用域链的机制导致闭包只能取得包含函数中任何变量的最后一个值。下面为书中例子：<br><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">createFunctions</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">	<span class="keyword">var</span> result = <span class="keyword">new</span> <span class="built_in">Array</span>();</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">0</span>;i &lt; <span class="number">10</span>;i++)&#123;</span><br><span class="line">		result[i] = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">			<span class="keyword">return</span> i;</span><br><span class="line">		&#125;;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> a = createFunctions();</span><br><span class="line">a[<span class="number">0</span>]();  <span class="comment">//10</span></span><br><span class="line">a[<span class="number">1</span>]();  <span class="comment">//10</span></span><br></pre></td></tr></table></figure></p>
-<p>看上去这个函数会使每个函数都返回自己的索引值，但实际上，每个函数都返回10。只需要将原函数进行以下改写即可符合预期：<br><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">createFunctions</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">	<span class="keyword">var</span> result = <span class="keyword">new</span> <span class="built_in">Array</span>();</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">0</span>;i &lt; <span class="number">10</span>;i++)&#123;</span><br><span class="line">		result[i] = <span class="function"><span class="keyword">function</span>(<span class="params">num</span>)</span>&#123;</span><br><span class="line">			<span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">				<span class="keyword">return</span> num;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;(i);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> a = createFunctions();</span><br><span class="line">a[<span class="number">0</span>]();  <span class="comment">//0</span></span><br><span class="line">a[<span class="number">1</span>]();  <span class="comment">//1</span></span><br></pre></td></tr></table></figure></p>
-<p>利用这种方法可以实现每隔1s返回一个数组中的值，如下:<br><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> a = [<span class="number">0</span>,<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>,<span class="number">7</span>,<span class="number">8</span>,<span class="number">9</span>];</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">0</span>;i&lt; a.length;i++)&#123;</span><br><span class="line">	(<span class="function"><span class="keyword">function</span>(<span class="params">num</span>)</span>&#123;</span><br><span class="line">		setTimeout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">			<span class="built_in">console</span>.log(a[num]);</span><br><span class="line">		&#125;,i * <span class="number">1000</span>);</span><br><span class="line">	&#125;)(i);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<h4 id="闭包的内存泄露"><a href="#闭包的内存泄露" class="headerlink" title="闭包的内存泄露"></a>闭包的内存泄露</h4><p>由于IE9之前的版本JScript对象和COM对象使用不同的垃圾收集例程，因此闭包在IE的这些版本中会导致一些特殊的问题。具体来说，如果闭包的作用域链中保存着一个HTML元素，那么就意味着该元素无法被销毁。如下:<br><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">alertId</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">	<span class="keyword">var</span> element = <span class="built_in">document</span>.getElementById(<span class="string">"ediv"</span>);   <span class="comment">//element在用完后会一直存在；</span></span><br><span class="line">	element.onclick =<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">		alert(element.id);</span><br><span class="line">	&#125;;</span><br><span class="line">&#125;</span><br><span class="line">alertId();</span><br></pre></td></tr></table></figure></p>
-<p>想也解决这个问题，可以将代码稍微改写，将element在使用完毕后赋值为<code>null</code>即可，保证其占用内存的正常回收。<br><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">alertId</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">	<span class="keyword">var</span> element = <span class="built_in">document</span>.getElementById(<span class="string">"ediv"</span>);   <span class="comment">//element在用完后会一直存在；</span></span><br><span class="line">	element.onclick =<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">		alert(element.id);</span><br><span class="line">	&#125;; </span><br><span class="line">	element = <span class="literal">null</span>;   <span class="comment">//回收</span></span><br><span class="line">&#125;</span><br><span class="line">alertId();</span><br></pre></td></tr></table></figure></p>
+        <p>工作中从开发环境到生产环境，需要做许许多多的操作，诸如压缩图片，合并压缩js，css文件，生成css sprite图等等。如果持续靠人工来做这些事情真的是很无聊很烦躁，所以就要靠自动化工具来帮忙啦！</p>
+<a id="more"></a>
+<h2 id="Gulp"><a href="#Gulp" class="headerlink" title="Gulp"></a>Gulp</h2><p><a href="http://gulpjs.com/" target="_blank" rel="external">Gulp.js</a>是一个自动化构建工具，用来在开发项目的过程中自动执行一些固定的任务。类似的工具还有Grunt和Fis等。</p>
+<h3 id="Start"><a href="#Start" class="headerlink" title="Start"></a>Start</h3><p>1.全局安装gulp-cli命令行工具</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ npm install gulp-cli -g</span><br></pre></td></tr></table></figure>
+<p>2.作为项目开发依赖安装gulp</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ npm install gulp --save-dev</span><br></pre></td></tr></table></figure>
+<p>3.在项目根目录下创建<code>gulpfile.js</code>文件</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> gulp = <span class="built_in">require</span>(<span class="string">'gulp'</span>);</span><br><span class="line"></span><br><span class="line">gulp.task(<span class="string">'default'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="comment">// place code for your default task here</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>4.执行gulp任务</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ gulp</span><br></pre></td></tr></table></figure>
+<p>默认执行default任务，当然也可以通过<code>$ gulp &lt;task&gt; &lt;othertask&gt;</code>选择执行任务。</p>
+<h2 id="gulpfile-js任务设置"><a href="#gulpfile-js任务设置" class="headerlink" title="gulpfile.js任务设置"></a>gulpfile.js任务设置</h2><p>我们所有的任务都定义在gulpfile.js内，gulp提供了丰富的插件用来构建项目，下面将介绍我自己的一些任务设置。</p>
+<h4 id="所使用插件"><a href="#所使用插件" class="headerlink" title="所使用插件"></a>所使用插件</h4><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> gulp = <span class="built_in">require</span>(<span class="string">'gulp'</span>), <span class="comment">//引入gulp插件</span></span><br><span class="line">    del = <span class="built_in">require</span>(<span class="string">'del'</span>), <span class="comment">//删除文件</span></span><br><span class="line">    cached = <span class="built_in">require</span>(<span class="string">'gulp-cached'</span>), <span class="comment">//缓存当前任务中的文件，只让已修改的文件通过管道</span></span><br><span class="line">    uglify = <span class="built_in">require</span>(<span class="string">'gulp-uglify'</span>), <span class="comment">//js压缩</span></span><br><span class="line">    rename = <span class="built_in">require</span>(<span class="string">'gulp-rename'</span>), <span class="comment">//重命名</span></span><br><span class="line">    concat = <span class="built_in">require</span>(<span class="string">'gulp-concat'</span>), <span class="comment">//合并文件</span></span><br><span class="line">    notify = <span class="built_in">require</span>(<span class="string">'gulp-notify'</span>), <span class="comment">// 相当于console.log()</span></span><br><span class="line">    filter = <span class="built_in">require</span>(<span class="string">'gulp-filter'</span>), <span class="comment">//过滤筛选文件</span></span><br><span class="line">    rev = <span class="built_in">require</span>(<span class="string">'gulp-rev-append'</span>), <span class="comment">//添加MD5指纹</span></span><br><span class="line">    cssnano = <span class="built_in">require</span>(<span class="string">'gulp-cssnano'</span>), <span class="comment">//css压缩</span></span><br><span class="line">    spritesmith = <span class="built_in">require</span>(<span class="string">'gulp.spritesmith'</span>),	<span class="comment">//css雪碧图生成</span></span><br><span class="line">    imagemin = <span class="built_in">require</span>(<span class="string">'gulp-imagemin'</span>), <span class="comment">//图片优化</span></span><br><span class="line">    browserSync = <span class="built_in">require</span>(<span class="string">'browser-sync'</span>), <span class="comment">// 保存自动刷新</span></span><br><span class="line">    fileinclude = <span class="built_in">require</span>(<span class="string">'gulp-file-include'</span>), <span class="comment">// 可以 include html 文件</span></span><br><span class="line">    autoprefixer = <span class="built_in">require</span>(<span class="string">'gulp-autoprefixer'</span>); <span class="comment">// 添加 CSS 浏览器前缀</span></span><br></pre></td></tr></table></figure>
+<h4 id="Javascript文件处理"><a href="#Javascript文件处理" class="headerlink" title="Javascript文件处理"></a>Javascript文件处理</h4><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">gulp.task(<span class="string">'js'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> gulp.src([<span class="string">'src/js/**/*.js'</span>])</span><br><span class="line">        .pipe(cached(<span class="string">'js'</span>))</span><br><span class="line">        .pipe(gulp.dest(<span class="string">'dist/js'</span>))</span><br><span class="line">        .pipe(filter([<span class="string">'*'</span>,<span class="string">'!*.min.js'</span>]))</span><br><span class="line">        <span class="comment">//.pipe(concat('main.js'))     // js合并</span></span><br><span class="line">        <span class="comment">//.pipe(gulp.dest('dist/js'))</span></span><br><span class="line">        .pipe(rename(&#123;</span><br><span class="line">            suffix: <span class="string">'.min'</span></span><br><span class="line">        &#125;))</span><br><span class="line">        .pipe(uglify())</span><br><span class="line">        .pipe(gulp.dest(<span class="string">'dist/js'</span>))</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<h4 id="CSS处理"><a href="#CSS处理" class="headerlink" title="CSS处理"></a>CSS处理</h4><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">gulp.task(<span class="string">'css'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> gulp.src(<span class="string">'src/css/**/*.css'</span>)</span><br><span class="line">        .pipe(cached(<span class="string">'css'</span>))</span><br><span class="line">        .pipe(gulp.dest(<span class="string">'dist/css'</span>))</span><br><span class="line">        .pipe(filter([<span class="string">'*'</span>, <span class="string">'!*.min.css'</span>]))		<span class="comment">//选择所有非min.css结尾的css文件</span></span><br><span class="line">        .pipe(autoprefixer(<span class="string">'last 5 version'</span>))	</span><br><span class="line">        .pipe(gulp.dest(<span class="string">'dist/css'</span>))</span><br><span class="line">        .pipe(rename(&#123;</span><br><span class="line">            suffix: <span class="string">'.min'</span></span><br><span class="line">        &#125;))</span><br><span class="line">        .pipe(cssnano())</span><br><span class="line">        .pipe(gulp.dest(<span class="string">'dist/css'</span>))</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<h4 id="图片处理"><a href="#图片处理" class="headerlink" title="图片处理"></a>图片处理</h4><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">gulp.task(<span class="string">'image'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;			<span class="comment">//图片压缩</span></span><br><span class="line">    <span class="keyword">return</span> gulp.src(<span class="string">'src/img/**/*.&#123;jpg,jpeg,png,gif&#125;'</span>)</span><br><span class="line">        .pipe(cached(<span class="string">'image'</span>))</span><br><span class="line">        .pipe(imagemin(&#123;				<span class="comment">//插件参数设置，可参考npm包项目的介绍进行设置</span></span><br><span class="line">            optimizationLevel: <span class="number">3</span>,</span><br><span class="line">            progressive: <span class="literal">true</span>,</span><br><span class="line">            interlaced: <span class="literal">true</span>,</span><br><span class="line">            multipass: <span class="literal">true</span></span><br><span class="line">        &#125;))</span><br><span class="line">        .pipe(gulp.dest(<span class="string">'dist/img'</span>))</span><br><span class="line">&#125;);</span><br><span class="line">gulp.task(<span class="string">'sprite'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;		<span class="comment">//生成雪碧图</span></span><br><span class="line">	<span class="keyword">var</span> spriteData = gulp.src([<span class="string">'./sprite/*.png'</span>,<span class="string">'./sprite/*.jpg'</span>])</span><br><span class="line">    .pipe(spritesmith(&#123;</span><br><span class="line">    	imgName: <span class="string">'./sprite.png'</span>,</span><br><span class="line">      	cssName: <span class="string">'./sprite.css'</span></span><br><span class="line">	&#125;));</span><br><span class="line">  	<span class="keyword">return</span> spriteData.pipe(gulp.dest(<span class="string">'output/'</span>));</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<h4 id="为资源插入MD5指纹"><a href="#为资源插入MD5指纹" class="headerlink" title="为资源插入MD5指纹"></a>为资源插入MD5指纹</h4><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">gulp.task(<span class="string">'html'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    gulp.src(<span class="string">'src/*.html'</span>)</span><br><span class="line">        .pipe(fileinclude())    <span class="comment">// include html</span></span><br><span class="line">        .pipe(rev())            <span class="comment">// 生成并插入 MD5</span></span><br><span class="line">        .pipe(gulp.dest(<span class="string">'dist/'</span>));</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>其中gulp-file-include插件能够通过<code>@@include(&#39;./header.html&#39;)</code>的方式插入html模板。</p>
+<p>而gulp-rev-append则可以在文件后插入md5标识来防止缓存。</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"js/main.js?rev=@@hash"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span>  </span><br><span class="line"><span class="comment">&lt;!-- ?rev=@@hash 是插件插入标志的位置 --&gt;</span></span><br></pre></td></tr></table></figure>
+<p>ok，以后再补充=。=</p>
 
       
     </div>
@@ -382,7 +387,7 @@
           
             <a href="/tags/前端/" rel="tag">#前端</a>
           
-            <a href="/tags/JavaScript/" rel="tag">#JavaScript</a>
+            <a href="/tags/Gulp/" rel="tag">#Gulp</a>
           
         </div>
       
@@ -391,17 +396,13 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/01/08/seajs-jquery-plugin/" rel="next" title="Seajs模块化jquery及其插件">
-                <i class="fa fa-chevron-left"></i> Seajs模块化jquery及其插件
+              <a href="/2016/04/22/flex-box/" rel="next" title="Flex布局语法笔记">
+                <i class="fa fa-chevron-left"></i> Flex布局语法笔记
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/02/17/stringQuery/" rel="prev" title="面试题总结(字符串查询)">
-                面试题总结(字符串查询) <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -416,10 +417,10 @@
 
     <div class="post-spread">
       
-        <div class="ds-share flat" data-thread-key="2016/01/16/javascript-closure/"
-     data-title="浅谈JavaScript中的闭包"
+        <div class="ds-share flat" data-thread-key="2016/05/19/gulp/"
+     data-title="使用gulp构建项目"
      data-content=""
-     data-url="http://d12mnit.github.io/2016/01/16/javascript-closure/">
+     data-url="http://d12mnit.github.io/2016/05/19/gulp/">
   <div class="ds-share-inline">
     <ul  class="ds-share-icons-16">
 
@@ -446,8 +447,8 @@
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2016/01/16/javascript-closure/"
-           data-title="浅谈JavaScript中的闭包" data-url="http://d12mnit.github.io/2016/01/16/javascript-closure/">
+      <div class="ds-thread" data-thread-key="2016/05/19/gulp/"
+           data-title="使用gulp构建项目" data-url="http://d12mnit.github.io/2016/05/19/gulp/">
       </div>
     
   </div>
@@ -574,7 +575,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#闭包的定义"><span class="nav-number">1.</span> <span class="nav-text">闭包的定义</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#闭包的特性"><span class="nav-number">2.</span> <span class="nav-text">闭包的特性</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#能够在循环中找到对应元素的索引"><span class="nav-number">3.</span> <span class="nav-text">能够在循环中找到对应元素的索引</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#闭包的内存泄露"><span class="nav-number">4.</span> <span class="nav-text">闭包的内存泄露</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Gulp"><span class="nav-number">1.</span> <span class="nav-text">Gulp</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Start"><span class="nav-number">1.1.</span> <span class="nav-text">Start</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#gulpfile-js任务设置"><span class="nav-number">2.</span> <span class="nav-text">gulpfile.js任务设置</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#所使用插件"><span class="nav-number">2.0.1.</span> <span class="nav-text">所使用插件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Javascript文件处理"><span class="nav-number">2.0.2.</span> <span class="nav-text">Javascript文件处理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#CSS处理"><span class="nav-number">2.0.3.</span> <span class="nav-text">CSS处理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#图片处理"><span class="nav-number">2.0.4.</span> <span class="nav-text">图片处理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#为资源插入MD5指纹"><span class="nav-number">2.0.5.</span> <span class="nav-text">为资源插入MD5指纹</span></a></li></ol></li></ol></li></ol></div>
             
           </div>
         </section>
