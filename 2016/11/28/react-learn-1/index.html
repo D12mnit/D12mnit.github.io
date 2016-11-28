@@ -1,0 +1,868 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+  <meta name="google-site-verification" content="zup20h355oix65k0KkEdVn3v4zR4PNdYnwrlIVbyd5s" />
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Monda:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="前端,React," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="D12mnIT's Notes" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="本篇记录了一些React学习中所掌握的基础知识，遇到的一些问题及解决办法。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="React学习笔记（一）">
+<meta property="og:url" content="http://d12mnit.github.io/2016/11/28/react-learn-1/index.html">
+<meta property="og:site_name" content="D12mnIT's Notes">
+<meta property="og:description" content="本篇记录了一些React学习中所掌握的基础知识，遇到的一些问题及解决办法。">
+<meta property="og:updated_time" content="2016-11-28T07:48:05.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="React学习笔记（一）">
+<meta name="twitter:description" content="本篇记录了一些React学习中所掌握的基础知识，遇到的一些问题及解决办法。">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+  <title> React学习笔记（一） | D12mnIT's Notes </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?fe5c4ae35dffcf2472e5a11e8085486a";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">D12mnIT's Notes</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                React学习笔记（一）
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-11-28T15:45:35+08:00" content="2016-11-28">
+              2016-11-28
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/前端/" itemprop="url" rel="index">
+                    <span itemprop="name">前端</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/11/28/react-learn-1/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/11/28/react-learn-1/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2016/11/28/react-learn-1/" class="leancloud_visitors" data-flag-title="React学习笔记（一）">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>本篇记录了一些<code>React</code>学习中所掌握的基础知识，遇到的一些问题及解决办法。<br><a id="more"></a></p>
+<h2 id="JSX"><a href="#JSX" class="headerlink" title="JSX"></a>JSX</h2><p>学习<code>React</code>就不能离开<code>JSX</code>。使用<code>JSX</code>语法可以在<code>React</code>中使用类XML语法轻松地编写组件，类似于在JS中写HTML，能够比较清晰的展现组建的结构。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">var a = &lt;h1&gt;hello&lt;/h1&gt;;</span><br></pre></td></tr></table></figure>
+<p>我个人理解JSX是将模板引擎融入到JS当中，很多的使用方法和常见的模板引擎语法类似。</p>
+<h3 id="JSX一些注意事项"><a href="#JSX一些注意事项" class="headerlink" title="JSX一些注意事项"></a>JSX一些注意事项</h3><p><code>JSX</code>语法就不再多叙述，官方文档写得很详细，下面记录一些自己使用中觉得需要注意的一些事项。</p>
+<hr>
+<p><code>JSX</code>中属性值采用驼峰命名法，同时由于在JS中，有些属性名需要改变，比如：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">var elem = &lt;img className=&quot;avatar&quot; src=&quot;xxxxx&quot; /&gt;;</span><br><span class="line">// class在js中是保留字，所以要使用className代替。</span><br></pre></td></tr></table></figure>
+<hr>
+<p><code>JSX</code>语法最终会被<code>babel</code>编译成js,会调用React.createElement()，所以在文件中一定要引入React</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">import React from &apos;react&apos;;   // 尽管文件中没有使用也需要添加，否则会报错</span><br><span class="line">import ReactDOM from &apos;react-dom&apos;;</span><br><span class="line"></span><br><span class="line">ReactDOM.render(</span><br><span class="line">	&lt;h1&gt;hello, world&lt;/h1&gt;,</span><br><span class="line">	document.querySelector(&apos;#app&apos;)</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<p>我一般会比较懒的在<code>webpack</code>的config文件中通过</p>
+<figure class="highlight vim"><table><tr><td class="code"><pre><span class="line">plugin<span class="variable">s:</span> [</span><br><span class="line">    <span class="keyword">new</span> webpack.ProvidePlugin(&#123;</span><br><span class="line">      Reac<span class="variable">t:</span> <span class="string">'react'</span></span><br><span class="line">    &#125;)</span><br><span class="line">  ]</span><br></pre></td></tr></table></figure>
+<p>来提供一个全局变量的插入。</p>
+<hr>
+<p>此外<code>JSX</code>标签一定要闭合，定义的组件名必须以大写字母开头以与原生tag区分。</p>
+<h2 id="组件间的通信"><a href="#组件间的通信" class="headerlink" title="组件间的通信"></a>组件间的通信</h2><p><code>React</code>是单项数据流的，组件间的信息传递基本上有以下几种：</p>
+<ul>
+<li>父组件向子组件传递</li>
+<li>子组件向父组件传递</li>
+<li>兄弟组件之间的传递</li>
+</ul>
+<p>首先说说父组件向子组件传递信息，这个最为常见，也比较简单，通过<code>props</code>来传递。</p>
+<p>而子组件向父组件传递，这个一般是通过父组件定义一个回调函数，通过<code>props</code>传递给子组件，当子组件状态发生改变需要反映给父组件时，通过调用<code>props</code>传递的回调函数，改变父组件状态即可。不过如果层级嵌套过多，就会出现一层一层的向上回调的情况，用<code>props</code>的回调函数来处理就会比较复杂。</p>
+<p>由于目前我自己做的项目不是很复杂，所以并没有遇到层级过深的情况。不过有读过一些相关的文章，可以通过设置组件的<code>context</code>来避免<code>props</code>的层层传递（react-redux便是通过将state注入context实现的）。但是官方文档中也不推荐新手尝试使用<code>context</code>。。。</p>
+<p>最后一种兄弟组件的通信的话，一般是通过他们的共同父组件进行数据传递。或者通过定义一个全局的自定义事件来触发数据变更。</p>
+<h2 id="组件生命周期"><a href="#组件生命周期" class="headerlink" title="组件生命周期"></a>组件生命周期</h2><p>组件的生命周期，我个人是参照着官方文档的描述来记忆的，比较清晰，分别是mounting，updating，unmounting三个阶段。除unmounting阶段，每个阶段都会经历will,render,did三个小阶段。</p>
+<p>以下均是es6语法下的生命周期。</p>
+<p>mounting阶段是组件生成并插入dom中时所发生的阶段。发生顺序为：</p>
+<ul>
+<li>constructor()</li>
+<li>componentWillMount()</li>
+<li>render()</li>
+<li>componentdidMount()</li>
+</ul>
+<p>首先是<code>constructor()</code>，es6语法下组件类继承自<code>React.Component</code>类，在<code>constructor</code>构造函数中进行组件的<code>props</code>获取，初始化组件<code>state</code></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">constructor(props) &#123;</span><br><span class="line">  super(props);</span><br><span class="line">  this.state = &#123;.....&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><code>componentWillMount()</code>会在<code>render()</code>前执行，在其中对<code>state</code>的操作不会引起re-render。这个过程好像是和server端的render有关，目前我还没有用过。</p>
+<p>然后是<code>render()</code>函数，会生成组件dom结构并插入。官方说明<code>render()</code>应为纯函数，不应改变组件的state等，使得相同的传入有相同的返回。同时该阶段无法获取真实的dom结构，对真实dom的相关操作应在<code>componentDidMount()</code>中或其后的生命周期函数中。</p>
+<p><code>componentDidMount()</code>在<code>render()</code>后执行，此时dom结点已经插入，可以对dom进行事件绑定，绑定计时器等。同时ajax获取数据等也应该在该函数中。</p>
+<hr>
+<p>下面是updating阶段，是当组件的<code>state</code>改变或者接收到新的<code>props</code>时，会更新组件。</p>
+<ul>
+<li><code>componentWillReceiveProps()</code></li>
+<li><code>shouldComponentUpdate()</code></li>
+<li><code>componentWillUpdate()</code></li>
+<li><code>render()</code></li>
+<li><code>componentDidUpdate()</code></li>
+</ul>
+<p><code>componentWillReceiveProps()</code>阶段发生在组件接收到新<code>props</code>时，如果组建的<code>state</code>与<code>props</code>有关，则在这个函数中计算并更新<code>state</code>。如果只是组件内部改变<code>state</code>不会触发该函数。</p>
+<p><code>shouldComponentUpdate()</code>在接收到新的<code>props</code>和<code>state</code>时，决定是否触发<code>render()</code>更新组件，默认返回<code>true</code>。可以通过重该函数来优化性能(purerender就是重写了该函数)。如果返回<code>false</code>，则<code>componentWillUpdate()</code>，<code>render()</code>，<code>componentDidUpdate()</code>都不会触发。</p>
+<p><code>componentWillUpdate()</code>会在接收到新的<code>props</code>和<code>state</code>后触发<code>render()</code>前立即调用，可以做一些处理，但此时无法调用<code>this.setState()</code>来更新<code>state</code>。</p>
+<p><code>componentDidUpdate()</code>类似<code>componentDidMount()</code>，只是在更新时的<code>render()</code>后立即执行。</p>
+<hr>
+<p>最后是<code>unmounting</code>阶段，只有一个<code>componentWillUnmount()</code>函数，会在组件即将从DOM中卸载前执行，通常用来取消事件绑定，清除计时器，清除手动添加的dom结构等。</p>
+<p>生命周期官方的描述十分清晰，个人在项目中的使用，觉得只要理解他们的作用就一般不会有太大问题，不过也可能是我个人做的小项目还遇不到会发生的问题。最主要的可能就是要注意在<code>componentDidMount</code>中绑定的一些事件与计时器要记得在<code>componentWillUnmount</code>中清除掉吧。其次就是在<code>shouldComponentUpdate()</code>中做一些state的前后判断来优化一下性能，不过我的项目不大，优化了感觉效果基本看不出来。。。</p>
+<h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><p>记录一些零碎的东西吧。</p>
+<p>es6语法：</p>
+<p>es6自己接触挺久了，自己的项目一直是用的es6，很多新特性用起来都很友好，不过需要babel的支持。</p>
+<p>react中的es6语法也很清晰，很多新特性都能用上，比如通过箭头函数来绑定this到组件，通过object spread语法(需要安装babel的stage-2阶段来支持)来给深层级组件传递props(<code>&lt;My {...props} /&gt;</code>)(不过文档里不推荐经常使用，会传递一些不需要的props)。还有通过解构语法把<code>props</code>赋给其他变量等。</p>
+<p>mobile方面：</p>
+<p>移动端方面，由于之前的实习主要做的是移动端的H5页面，了解的多为交互上的内容，比如移动端的touch事件，css动画，手势等。其他的目前还在学习阶段吧。</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/前端/" rel="tag">#前端</a>
+          
+            <a href="/tags/React/" rel="tag">#React</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/09/20/mongodb/" rel="next" title="MongoDB 学习笔记（一）">
+                <i class="fa fa-chevron-left"></i> MongoDB 学习笔记（一）
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <div class="ds-share flat" data-thread-key="2016/11/28/react-learn-1/"
+     data-title="React学习笔记（一）"
+     data-content=""
+     data-url="http://d12mnit.github.io/2016/11/28/react-learn-1/">
+  <div class="ds-share-inline">
+    <ul  class="ds-share-icons-16">
+
+      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+    </ul>
+    <div class="ds-share-icons-more">
+    </div>
+  </div>
+</div>
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/11/28/react-learn-1/"
+           data-title="React学习笔记（一）" data-url="http://d12mnit.github.io/2016/11/28/react-learn-1/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.png"
+               alt="D12mnIT" />
+          <p class="site-author-name" itemprop="name">D12mnIT</p>
+          <p class="site-description motion-element" itemprop="description">随手记，随手写，随便扯</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">13</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">16</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/D12mnit" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/2097208621" target="_blank" title="Weibo">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  Weibo
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.zhihu.com/people/zmcss" target="_blank" title="zhihu">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  zhihu
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#JSX"><span class="nav-number">1.</span> <span class="nav-text">JSX</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#JSX一些注意事项"><span class="nav-number">1.1.</span> <span class="nav-text">JSX一些注意事项</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#组件间的通信"><span class="nav-number">2.</span> <span class="nav-text">组件间的通信</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#组件生命周期"><span class="nav-number">3.</span> <span class="nav-text">组件生命周期</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#其他"><span class="nav-number">4.</span> <span class="nav-text">其他</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2015 - 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">D12mnIT</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"d12mnit"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+  
+
+
+
+
+
+  
+  
+  
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("0DyssAl3FyuWRmqWhU3Ie0m1", "8hL6i2xnJiyb9kaeal4kNnrY");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+<script type="text/javascript" async src="//push.zhanzhang.baidu.com/push.js">
+</script>
+
+
+</body>
+</html>
