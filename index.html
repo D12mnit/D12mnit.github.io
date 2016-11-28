@@ -478,35 +478,14 @@
 
       
         
-          
-            <h2 id="MongoDB简介"><a href="#MongoDB简介" class="headerlink" title="MongoDB简介"></a>MongoDB简介</h2><p>MongoDB是一种非关系型数据库，是基于分布式文件存储的开源数据库系统，旨在为WEB应用提供可扩展的高性能数据存储解决方案。</p>
+          <h2 id="MongoDB简介"><a href="#MongoDB简介" class="headerlink" title="MongoDB简介"></a>MongoDB简介</h2><p>MongoDB是一种非关系型数据库，是基于分布式文件存储的开源数据库系统，旨在为WEB应用提供可扩展的高性能数据存储解决方案。</p>
 <p>MongoDB中，数据储存为一个文档，数据结构类似于JSON对象，字段值可包括其他文档    ，数组及文档数组等。</p>
 <h2 id="MongoDB使用相关操作"><a href="#MongoDB使用相关操作" class="headerlink" title="MongoDB使用相关操作"></a>MongoDB使用相关操作</h2><p>不同系统安装方法官方文档上都有详细的说明，暂时不谈了，直接来记录一下MongoDB数据库的创建等基本操作方法吧。</p>
-<h3 id="1-启动数据库与连接"><a href="#1-启动数据库与连接" class="headerlink" title="1.启动数据库与连接"></a>1.启动数据库与连接</h3><p>使用mongodb shell启动数据库服务器，输入以下命令：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ mongod [option]</span><br></pre></td></tr></table></figure>
-<p>默认仅输入<code>mongod</code>即可启用数据库服务器，默认数据库存储在/data/db，如未创建该文件夹，需要手动指定数据库存放路径，设置option即可。</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ mongod --dbpath Documents/mongodb_data</span><br></pre></td></tr></table></figure>
-<p>启动成功后会看到如下信息：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">2016-09-22T10:37:02.015+0800 I CONTROL  [initandlisten] MongoDB starting : pid=9979 port=27017 dbpath=Documents/mongodb_data 64-bit host=zhangmengdeMacBook-Pro.local</span><br><span class="line">2016-09-22T10:37:02.016+0800 I CONTROL  [initandlisten] db version v3.2.6</span><br><span class="line">2016-09-22T10:37:02.016+0800 I CONTROL  [initandlisten] git version: 05552b562c7a0b3143a729aaa0838e558dc49b25</span><br><span class="line">2016-09-22T10:37:02.016+0800 I CONTROL  [initandlisten] OpenSSL version: OpenSSL 1.0.2h  3 May 2016</span><br><span class="line">2016-09-22T10:37:02.016+0800 I CONTROL  [initandlisten] allocator: system</span><br><span class="line">2016-09-22T10:37:02.016+0800 I CONTROL  [initandlisten] modules: none</span><br><span class="line">2016-09-22T10:37:02.016+0800 I CONTROL  [initandlisten] build environment:</span><br><span class="line">2016-09-22T10:37:02.016+0800 I CONTROL  [initandlisten]     distarch: x86_64</span><br><span class="line">2016-09-22T10:37:02.016+0800 I CONTROL  [initandlisten]     target_arch: x86_64</span><br><span class="line">2016-09-22T10:37:02.016+0800 I CONTROL  [initandlisten] options: &#123; storage: &#123; dbPath: <span class="string">"Documents/mongodb_data"</span> &#125; &#125;</span><br><span class="line">2016-09-22T10:37:02.016+0800 I -        [initandlisten] Detected data files <span class="keyword">in</span> Documents/mongodb_data created by the <span class="string">'wiredTiger'</span> storage engine, so setting the active storage engine to <span class="string">'wiredTiger'</span>.</span><br><span class="line">2016-09-22T10:37:02.016+0800 I STORAGE  [initandlisten] wiredtiger_open config: create,cache_size=4G,session_max=20000,eviction=(threads_max=4),config_base=<span class="literal">false</span>,statistics=(fast),<span class="built_in">log</span>=(enabled=<span class="literal">true</span>,archive=<span class="literal">true</span>,path=journal,compressor=snappy),file_manager=(close_idle_time=100000),checkpoint=(<span class="built_in">wait</span>=60,<span class="built_in">log</span>_size=2GB),statistics_<span class="built_in">log</span>=(<span class="built_in">wait</span>=0),</span><br><span class="line">2016-09-22T10:37:02.488+0800 I FTDC     [initandlisten] Initializing full-time diagnostic data capture with directory <span class="string">'Documents/mongodb_data/diagnostic.data'</span></span><br><span class="line">2016-09-22T10:37:02.488+0800 I NETWORK  [HostnameCanonicalizationWorker] Starting hostname canonicalization worker</span><br><span class="line">2016-09-22T10:37:02.489+0800 I NETWORK  [initandlisten] waiting <span class="keyword">for</span> connections on port 27017</span><br></pre></td></tr></table></figure>
-<p>启动成功后，打开另一个终端窗口，输入以下内容即可连接数据库：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ mongo</span><br><span class="line">MongoDB shell version: 3.2.6</span><br><span class="line">connecting to: <span class="built_in">test</span></span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
-<h3 id="2-MongoDB-CLI相关操作"><a href="#2-MongoDB-CLI相关操作" class="headerlink" title="2.MongoDB CLI相关操作"></a>2.MongoDB CLI相关操作</h3><p>显示当前数据库</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">&gt; db</span><br><span class="line"><span class="built_in">test</span></span><br></pre></td></tr></table></figure>
-<p>显示所有数据库</p>
-<figure class="highlight css"><table><tr><td class="code"><pre><span class="line">&gt; <span class="selector-tag">show</span> <span class="selector-tag">dbs</span></span><br><span class="line"><span class="selector-tag">local</span>	0<span class="selector-class">.000GB</span></span><br><span class="line"><span class="selector-tag">test</span>	0<span class="selector-class">.000GB</span></span><br></pre></td></tr></table></figure>
-<p>创建一个<code>collection</code></p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">&gt; db.createCollection(<span class="string">'name'</span>)</span><br><span class="line">&#123;<span class="string">"ok"</span>: 1&#125;  </span><br><span class="line"><span class="comment">#创建成功显示</span></span><br></pre></td></tr></table></figure>
-<p>显示当前数据库所有<code>collection</code></p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">&gt; db.getCollectionNames()</span><br><span class="line">[ <span class="string">"name"</span> ]</span><br></pre></td></tr></table></figure>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">&gt; db.test.createIndex()</span><br></pre></td></tr></table></figure>
-<p>关闭数据库连接</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">&gt; use admin</span><br><span class="line">&gt; db.shutdownServer()</span><br></pre></td></tr></table></figure>
-<h2 id="Mongoose相关操作"><a href="#Mongoose相关操作" class="headerlink" title="Mongoose相关操作"></a>Mongoose相关操作</h2><p>安装</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">npm install mongoose --save</span><br></pre></td></tr></table></figure>
-<p>在项目中引用</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> mongoose = <span class="built_in">require</span>(<span class="string">'mongoose'</span>)</span><br></pre></td></tr></table></figure>
-
-          
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/09/20/mongodb/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>

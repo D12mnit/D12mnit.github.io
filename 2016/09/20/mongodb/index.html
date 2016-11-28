@@ -110,7 +110,7 @@ MongoDB使用相关操作不同系统安装方法官方文档上都有详细的�
 <meta property="og:description" content="MongoDB简介MongoDB是一种非关系型数据库，是基于分布式文件存储的开源数据库系统，旨在为WEB应用提供可扩展的高性能数据存储解决方案。
 MongoDB中，数据储存为一个文档，数据结构类似于JSON对象，字段值可包括其他文档    ，数组及文档数组等。
 MongoDB使用相关操作不同系统安装方法官方文档上都有详细的说明，暂时不谈了，直接来记录一下MongoDB数据库的创建等基本操作方法吧。">
-<meta property="og:updated_time" content="2016-11-12T08:36:43.000Z">
+<meta property="og:updated_time" content="2016-11-28T07:49:55.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="MongoDB 学习笔记（一）">
 <meta name="twitter:description" content="MongoDB简介MongoDB是一种非关系型数据库，是基于分布式文件存储的开源数据库系统，旨在为WEB应用提供可扩展的高性能数据存储解决方案。
@@ -351,6 +351,7 @@ MongoDB使用相关操作不同系统安装方法官方文档上都有详细的�
         <h2 id="MongoDB简介"><a href="#MongoDB简介" class="headerlink" title="MongoDB简介"></a>MongoDB简介</h2><p>MongoDB是一种非关系型数据库，是基于分布式文件存储的开源数据库系统，旨在为WEB应用提供可扩展的高性能数据存储解决方案。</p>
 <p>MongoDB中，数据储存为一个文档，数据结构类似于JSON对象，字段值可包括其他文档    ，数组及文档数组等。</p>
 <h2 id="MongoDB使用相关操作"><a href="#MongoDB使用相关操作" class="headerlink" title="MongoDB使用相关操作"></a>MongoDB使用相关操作</h2><p>不同系统安装方法官方文档上都有详细的说明，暂时不谈了，直接来记录一下MongoDB数据库的创建等基本操作方法吧。</p>
+<a id="more"></a>
 <h3 id="1-启动数据库与连接"><a href="#1-启动数据库与连接" class="headerlink" title="1.启动数据库与连接"></a>1.启动数据库与连接</h3><p>使用mongodb shell启动数据库服务器，输入以下命令：</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ mongod [option]</span><br></pre></td></tr></table></figure>
 <p>默认仅输入<code>mongod</code>即可启用数据库服务器，默认数据库存储在/data/db，如未创建该文件夹，需要手动指定数据库存放路径，设置option即可。</p>
@@ -362,9 +363,9 @@ MongoDB使用相关操作不同系统安装方法官方文档上都有详细的�
 <h3 id="2-MongoDB-CLI相关操作"><a href="#2-MongoDB-CLI相关操作" class="headerlink" title="2.MongoDB CLI相关操作"></a>2.MongoDB CLI相关操作</h3><p>显示当前数据库</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">&gt; db</span><br><span class="line"><span class="built_in">test</span></span><br></pre></td></tr></table></figure>
 <p>显示所有数据库</p>
-<figure class="highlight css"><table><tr><td class="code"><pre><span class="line">&gt; <span class="selector-tag">show</span> <span class="selector-tag">dbs</span></span><br><span class="line"><span class="selector-tag">local</span>	0<span class="selector-class">.000GB</span></span><br><span class="line"><span class="selector-tag">test</span>	0<span class="selector-class">.000GB</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">&gt; show dbs</span><br><span class="line"><span class="built_in">local</span>	0.000GB</span><br><span class="line"><span class="built_in">test</span>	0.000GB</span><br></pre></td></tr></table></figure>
 <p>创建一个<code>collection</code></p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">&gt; db.createCollection(<span class="string">'name'</span>)</span><br><span class="line">&#123;<span class="string">"ok"</span>: 1&#125;  </span><br><span class="line"><span class="comment">#创建成功显示</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">&gt; db.createCollection(<span class="string">'name'</span>)</span><br><span class="line">&#123;<span class="string">"ok"</span>: 1&#125;</span><br><span class="line"><span class="comment">#创建成功显示</span></span><br></pre></td></tr></table></figure>
 <p>显示当前数据库所有<code>collection</code></p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">&gt; db.getCollectionNames()</span><br><span class="line">[ <span class="string">"name"</span> ]</span><br></pre></td></tr></table></figure>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">&gt; db.test.createIndex()</span><br></pre></td></tr></table></figure>
