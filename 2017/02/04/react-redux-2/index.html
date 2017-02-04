@@ -101,27 +101,18 @@
 
 
 <meta name="description" content="Redux是一款状态管理器，通常与React结合使用。
-概念介绍Redux负责管理整个应用中的状态state，在Redux中有三个概念，分别是Acitons,Reducers,Store。
-ActionsActions用来描述发生了什么，反映了用户的操作并将这些操作所涉及到的数据改变传递给store。
-上述的数据传递在Redux中通过store.dispatch(action)来实现。
-Actio">
+概念介绍Redux负责管理整个应用中的状态state，在Redux中有三个概念，分别是Acitons,Reducers,Store。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="react/redux-2">
+<meta property="og:title" content="React/Redux学习笔记（二）">
 <meta property="og:url" content="http://d12mnit.github.io/2017/02/04/react-redux-2/index.html">
 <meta property="og:site_name" content="D12mnIT's Notes">
 <meta property="og:description" content="Redux是一款状态管理器，通常与React结合使用。
-概念介绍Redux负责管理整个应用中的状态state，在Redux中有三个概念，分别是Acitons,Reducers,Store。
-ActionsActions用来描述发生了什么，反映了用户的操作并将这些操作所涉及到的数据改变传递给store。
-上述的数据传递在Redux中通过store.dispatch(action)来实现。
-Actio">
-<meta property="og:updated_time" content="2017-02-04T03:39:46.000Z">
+概念介绍Redux负责管理整个应用中的状态state，在Redux中有三个概念，分别是Acitons,Reducers,Store。">
+<meta property="og:updated_time" content="2017-02-04T03:42:06.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="react/redux-2">
+<meta name="twitter:title" content="React/Redux学习笔记（二）">
 <meta name="twitter:description" content="Redux是一款状态管理器，通常与React结合使用。
-概念介绍Redux负责管理整个应用中的状态state，在Redux中有三个概念，分别是Acitons,Reducers,Store。
-ActionsActions用来描述发生了什么，反映了用户的操作并将这些操作所涉及到的数据改变传递给store。
-上述的数据传递在Redux中通过store.dispatch(action)来实现。
-Actio">
+概念介绍Redux负责管理整个应用中的状态state，在Redux中有三个概念，分别是Acitons,Reducers,Store。">
 
 
 
@@ -139,7 +130,7 @@ Actio">
   };
 </script>
 
-  <title> react/redux-2 | D12mnIT's Notes </title>
+  <title> React/Redux学习笔记（二） | D12mnIT's Notes </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -279,7 +270,7 @@ Actio">
             
             
               
-                react/redux-2
+                React/Redux学习笔记（二）
               
             
           </h1>
@@ -325,7 +316,7 @@ Actio">
 
           
           
-             <span id="/2017/02/04/react-redux-2/" class="leancloud_visitors" data-flag-title="react/redux-2">
+             <span id="/2017/02/04/react-redux-2/" class="leancloud_visitors" data-flag-title="React/Redux学习笔记（二）">
                &nbsp; | &nbsp;
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -349,6 +340,7 @@ Actio">
       
         <p>Redux是一款状态管理器，通常与React结合使用。</p>
 <h2 id="概念介绍"><a href="#概念介绍" class="headerlink" title="概念介绍"></a>概念介绍</h2><p>Redux负责管理整个应用中的状态<code>state</code>，在Redux中有三个概念，分别是<code>Acitons</code>,<code>Reducers</code>,<code>Store</code>。</p>
+<a id="more"></a>
 <h3 id="Actions"><a href="#Actions" class="headerlink" title="Actions"></a>Actions</h3><p><code>Actions</code>用来描述发生了什么，反映了用户的操作并将这些操作所涉及到的数据改变传递给<code>store</code>。</p>
 <p>上述的数据传递在Redux中通过<code>store.dispatch(action)</code>来实现。</p>
 <p><code>Actions</code>是一个JavaScript对象，并且必定包括<code>type</code>属性，这个属性定义了Actions究竟做了什么操作。</p>
@@ -384,7 +376,7 @@ Actio">
 <p>想要在react中使用redux，需要安装react-redux库来连接react与redux。react-redux提供了几个连接函数与包装组件。</p>
 <h3 id="Provider"><a href="#Provider" class="headerlink" title="Provider"></a>Provider</h3><p><code>&lt;Provider &gt;</code>组件一般用于将store注入整个应用中，因此应该将react根组件嵌套在其中。<code>&lt;Provider store={store}&gt;</code>通过利用react的<code>context</code>特性，将store注入整个应用中，这样，便可以通过connect函数获取store并将state与dispatch函数注入到<code>conncet</code>函数包装组件的<code>props</code>中。</p>
 <p>由于利用了<code>context</code>特性，在子组件中，其实可以通过一下方法获取store。</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> React, &#123; Component, PropTypes &#125; <span class="keyword">from</span> <span class="string">'react'</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="class"><span class="keyword">class</span> <span class="title">sub</span> <span class="keyword">extends</span> <span class="title">Component</span></span>&#123;</span><br><span class="line">  <span class="keyword">static</span> contextTypes = &#123;</span><br><span class="line">    store: PropTypes.object</span><br><span class="line">  &#125;;</span><br><span class="line">  <span class="keyword">constructor</span>(props)&#123;</span><br><span class="line">    <span class="keyword">super</span>(props)</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="keyword">this</span>.context.store)</span><br><span class="line">  &#125;</span><br><span class="line">  render()&#123;</span><br><span class="line">    <span class="keyword">const</span> &#123; dispatch &#125; = <span class="keyword">this</span>.context.store</span><br><span class="line">    <span class="keyword">return</span> <span class="xml"><span class="tag">&lt;<span class="name">div</span> /&gt;</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> React, &#123; Component, PropTypes &#125; <span class="keyword">from</span> <span class="string">'react'</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="class"><span class="keyword">class</span> <span class="title">sub</span> <span class="keyword">extends</span> <span class="title">Component</span></span>&#123;</span><br><span class="line">  <span class="keyword">static</span> contextTypes = &#123;</span><br><span class="line">    store: PropTypes.object</span><br><span class="line">  &#125;;</span><br><span class="line">  <span class="keyword">constructor</span>(props)&#123;</span><br><span class="line">    <span class="keyword">super</span>(props)</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="keyword">this</span>.context.store)</span><br><span class="line">  &#125;</span><br><span class="line">  render()&#123;</span><br><span class="line">    <span class="keyword">const</span> &#123; dispatch &#125; = <span class="keyword">this</span>.context.store</span><br><span class="line">    <span class="keyword">return</span> &lt;div /&gt;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>待续。</p>
 
       

@@ -270,7 +270,7 @@
               
                 
                 <a class="post-title-link" href="/2017/02/04/react-redux-2/" itemprop="url">
-                  react/redux-2
+                  React/Redux学习笔记（二）
                 </a>
               
             
@@ -317,7 +317,7 @@
 
           
           
-             <span id="/2017/02/04/react-redux-2/" class="leancloud_visitors" data-flag-title="react/redux-2">
+             <span id="/2017/02/04/react-redux-2/" class="leancloud_visitors" data-flag-title="React/Redux学习笔记（二）">
                &nbsp; | &nbsp;
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -340,48 +340,13 @@
 
       
         
-          
-            <p>Redux是一款状态管理器，通常与React结合使用。</p>
+          <p>Redux是一款状态管理器，通常与React结合使用。</p>
 <h2 id="概念介绍"><a href="#概念介绍" class="headerlink" title="概念介绍"></a>概念介绍</h2><p>Redux负责管理整个应用中的状态<code>state</code>，在Redux中有三个概念，分别是<code>Acitons</code>,<code>Reducers</code>,<code>Store</code>。</p>
-<h3 id="Actions"><a href="#Actions" class="headerlink" title="Actions"></a>Actions</h3><p><code>Actions</code>用来描述发生了什么，反映了用户的操作并将这些操作所涉及到的数据改变传递给<code>store</code>。</p>
-<p>上述的数据传递在Redux中通过<code>store.dispatch(action)</code>来实现。</p>
-<p><code>Actions</code>是一个JavaScript对象，并且必定包括<code>type</code>属性，这个属性定义了Actions究竟做了什么操作。</p>
-<p>比较典型的一个Actions对象如下：</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    type: <span class="string">'INCREMENT'</span>,</span><br><span class="line">    idx: <span class="number">1</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>当然，一般来说我们的操作对象不会总是一个，所以触发Actions的时候，他传递的内容也会有所不同，一般我们通过用函数包装来使其根据操作返回不同的Actions对象。</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> addCount = (idx) =&gt; &#123;</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">        type: <span class="string">'INCREMENT'</span>,</span><br><span class="line">        idx</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">store.dispatch(addCount(<span class="number">1</span>))</span><br></pre></td></tr></table></figure>
-<p>通常一个应用会有较多的Actions，所以我们可以将Actions放到一个单独的文件模块中，然后再应用中引入，这样便于管理Actions，并且在需要引入Actions的地方通过module方便的引入。</p>
-<h3 id="Reducers"><a href="#Reducers" class="headerlink" title="Reducers"></a>Reducers</h3><p>如果说actions是告诉程序要干什么，那么reducers就是去完成actions指定的工作，去相应的更新<code>state</code>。</p>
-<p>reducer函数应保持为纯净的，即纯函数。reducer在对state进行更新时，应返回一个新的state对象，而不是在原有的state对象上做更改。</p>
-<p>reducer函数接受两个参数，分别是旧的state和action。通过对action的type属性的判断，来进行相应的更新操作。</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> myReducer = (state = initialState, action) =&gt; &#123;</span><br><span class="line">  <span class="keyword">switch</span>(action.type)&#123;</span><br><span class="line">    <span class="keyword">case</span> action1:</span><br><span class="line">      <span class="keyword">return</span> &#123;...state, xxx &#125;  <span class="comment">// 使用spread运算符返回新的对象，也可以用Object.assign不过都要经过babel转义</span></span><br><span class="line">    <span class="keyword">default</span>:</span><br><span class="line">      <span class="keyword">return</span> state  <span class="comment">// 在位置情况下确保返回旧的state。</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>在更新时返回新的state，或未更新时返回旧的state，而不是直接修改旧state，这有利于如React等框架进行diff，提高性能。</p>
-<p>显然一个应用中，会有很多的action，如果都写在一个reducer函数中会很拥挤，不方便维护。Redux支持将reducer函数进行拆分。以下面的state结构为例：</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  state1: <span class="string">'state1'</span>,</span><br><span class="line">  state2: [&#123;</span><br><span class="line">    <span class="comment">//state</span></span><br><span class="line">  &#125;,&#123;</span><br><span class="line">    <span class="comment">//state</span></span><br><span class="line">  &#125;]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>我们可以将对于state1与state2的操作从一个reducer函数中拆分出来。</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> state1 = (state = <span class="string">'initialState1'</span>, action) =&gt; &#123;</span><br><span class="line">  <span class="keyword">switch</span>(action.type)&#123;</span><br><span class="line">    <span class="keyword">case</span> action1:</span><br><span class="line">      <span class="keyword">return</span> action1.xxx</span><br><span class="line">    <span class="keyword">default</span>:</span><br><span class="line">      <span class="keyword">return</span> state</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">const</span> state2 = (state = [], action) =&gt;&#123;</span><br><span class="line">  <span class="keyword">switch</span>(action.type)&#123;</span><br><span class="line">    <span class="keyword">case</span> action1:</span><br><span class="line">      <span class="keyword">return</span> [...state, action1.xxx]</span><br><span class="line">    <span class="keyword">default</span>:</span><br><span class="line">      <span class="keyword">return</span> state</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>然后可以通过Redux提供的combineReducers函数将两个reducer函数合并为一个函数：</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; combineReducers &#125; <span class="keyword">from</span> <span class="string">'redux'</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> mainReducer = combineReducers(&#123;</span><br><span class="line">  state1,   <span class="comment">// 相当于 state1: state1(state.state1, action)</span></span><br><span class="line">  state2	<span class="comment">// 相当于 state2: state2(state.state2, action)</span></span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> mainReducer</span><br></pre></td></tr></table></figure>
-<p>每个reducer只负责整个state中的一部分，并通过combineReducers将他们整合起来，并告诉他们负责的是哪一部分的state，从上面可以看出，可以将单独reducer的名字与他负责的state部分同名命名，在combineReducers中可以方便引入。</p>
-<p>合并后的最终reducer函数，将会在后面的store的创建函数<code>createStore()</code>中作为参数传入，来将reducer与action与state连接起来。</p>
-<h3 id="Store"><a href="#Store" class="headerlink" title="Store"></a>Store</h3><p>Store就是讲actions，reducers和state联系到一起的对象。通过<code>createStore()</code>函数创建store对象。</p>
-<p><code>createStore()</code>接受三个参数，第一个是应用根的reducer函数，后两个参数可选，分别是应用的初始state，和一个高阶函数，如中间件middleware。</p>
-<p>生成的store对象包括以下方法：</p>
-<ul>
-<li><code>getState()</code>，获取当前的state</li>
-<li><code>dispatch(action)</code>，发起action更新state，</li>
-<li><code>subscribe(listener)</code>，注册监听器，会在每次dispatch后触发。</li>
-</ul>
-<p>那么在React中，通过<code>react-redux</code>提供的<code>Provider</code>组件将store注入React根组件中。Provider将store通过react的<code>context</code>特性注入到组件及子组件中，可以在子组件中通过<code>context</code>来访问store。</p>
-<p>但一般来说不会再react组件中用到诸如getState()，subscribe()等函数，那么通过使用<code>react-redux</code>提供的<code>connect()</code>函数包装我们的react组件，可以将state与dispatch函数注入到组件的props属性中，即将react组件与redux store关联起来。</p>
-<h2 id="react-redux"><a href="#react-redux" class="headerlink" title="react-redux"></a>react-redux</h2><p>redux通常和react配合使用，对react应用的状态进行统一管理。</p>
-<p>想要在react中使用redux，需要安装react-redux库来连接react与redux。react-redux提供了几个连接函数与包装组件。</p>
-<h3 id="Provider"><a href="#Provider" class="headerlink" title="Provider"></a>Provider</h3><p><code>&lt;Provider &gt;</code>组件一般用于将store注入整个应用中，因此应该将react根组件嵌套在其中。<code>&lt;Provider store={store}&gt;</code>通过利用react的<code>context</code>特性，将store注入整个应用中，这样，便可以通过connect函数获取store并将state与dispatch函数注入到<code>conncet</code>函数包装组件的<code>props</code>中。</p>
-<p>由于利用了<code>context</code>特性，在子组件中，其实可以通过一下方法获取store。</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> React, &#123; Component, PropTypes &#125; <span class="keyword">from</span> <span class="string">'react'</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="class"><span class="keyword">class</span> <span class="title">sub</span> <span class="keyword">extends</span> <span class="title">Component</span></span>&#123;</span><br><span class="line">  <span class="keyword">static</span> contextTypes = &#123;</span><br><span class="line">    store: PropTypes.object</span><br><span class="line">  &#125;;</span><br><span class="line">  <span class="keyword">constructor</span>(props)&#123;</span><br><span class="line">    <span class="keyword">super</span>(props)</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="keyword">this</span>.context.store)</span><br><span class="line">  &#125;</span><br><span class="line">  render()&#123;</span><br><span class="line">    <span class="keyword">const</span> &#123; dispatch &#125; = <span class="keyword">this</span>.context.store</span><br><span class="line">    <span class="keyword">return</span> <span class="xml"><span class="tag">&lt;<span class="name">div</span> /&gt;</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span></span><br></pre></td></tr></table></figure>
-<p>待续。</p>
-
-          
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2017/02/04/react-redux-2/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
