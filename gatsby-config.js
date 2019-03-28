@@ -3,7 +3,7 @@ module.exports = {
     title: `d12mnit.io`,
     author: `Zhang Meng`,
     description: `A starter blog demonstrating what Gatsby can do.`,
-    siteUrl: `https://gatsby-starter-blog-demo.netlify.com/`,
+    siteUrl: `https://d12mnit.github.io/`,
     social: {
       twitter: `kylemathews`,
     },
@@ -57,8 +57,8 @@ module.exports = {
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
-        name: `Gatsby Starter Blog`,
-        short_name: `GatsbyJS`,
+        name: `D12mnit's Blog`,
+        short_name: `d12mnit`,
         start_url: `/`,
         background_color: `#ffffff`,
         theme_color: `#663399`,
