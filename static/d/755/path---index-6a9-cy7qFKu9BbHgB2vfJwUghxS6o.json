@@ -1,0 +1,1 @@
+{"data":{"site":{"siteMetadata":{"title":"Gatsby Starter Blog"}},"allMarkdownRemark":{"edges":[{"node":{"excerpt":"有种改版叫 Rewrite，这个博客也是如此。","fields":{"slug":"/hello-world/"},"frontmatter":{"date":"March 29, 2019","title":"Building Responsive Web App","description":null}}}]}},"pageContext":{"isCreatedByStatefulCreatePages":true}}

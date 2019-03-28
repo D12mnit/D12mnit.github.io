@@ -1,0 +1,1 @@
+{"data":{"site":{"siteMetadata":{"title":"Gatsby Starter Blog"}},"allMarkdownRemark":{"edges":[{"node":{"excerpt":"It’s happy to see My new blog start today","fields":{"slug":"/hello-world/"},"frontmatter":{"date":"March 29, 2019","title":"Building Responsive Web App","description":null}}}]}},"pageContext":{"isCreatedByStatefulCreatePages":true}}
